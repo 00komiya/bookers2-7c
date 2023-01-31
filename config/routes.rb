@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-  get 'searches/search'
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   devise_for :users
   root :to =>"homes#top"
   get "home/about"=>"homes#about"
@@ -19,7 +17,8 @@ Rails.application.routes.draw do
 
   resources :groups do
     get "join" => "groups#join"
+    resources :event_notices, only: [:new, :create]
+    get "event_notices" => "event_notices#sent"
   end
 
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
